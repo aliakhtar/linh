@@ -9,10 +9,14 @@ import com.typesafe.scalalogging.Logger
 object Preprocessor {
 
     private val syns = Map(
-        "show" -> Set("display", "view", "render", "check", "show me"),
+        "show" -> Set("display", "view", "render", "check", "show"),
         "inventory" -> Set("inv", "stock", "quantity", "qty")
     )
 
+
+    def getSyns(word: String):Set[String] = {
+        syns.getOrElse(word, Set())
+    }
 
     def mapSyn(token: String):String = {
         if (syns.isDefinedAt(token))

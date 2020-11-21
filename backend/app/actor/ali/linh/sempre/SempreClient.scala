@@ -14,7 +14,7 @@ import edu.stanford.nlp.sempre.Master
 import edu.stanford.nlp.sempre.Master._
 
 
-class SempreClient(env: Env) {
+class SempreClient(env: Env, analyzer: LanguageAnalyzer = new CoreNLPAnalyzer) {
     private val log = Logger[SempreClient]
 
     log.info(s"Grammar file: ${env.conf.sempre.grammarFile}");
@@ -26,7 +26,7 @@ class SempreClient(env: Env) {
     private val dataset = new Dataset
     private val grammar = new Grammar
     //private val analyzer = new CoreNLPAnalyzer
-    private val analyzer = new SimpleAnalyzer
+    //this.analyzer = analyzer
     LanguageAnalyzer.setSingleton(this.analyzer)
 
     grammar.read(env.conf.sempre.grammarFile)
