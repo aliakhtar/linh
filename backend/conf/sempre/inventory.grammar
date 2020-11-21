@@ -1,0 +1,4 @@
+(rule $ROOT ($Expr) (IdentityFn))
+
+#(rule $Expr (food) (ConstantFn (call edu.stanford.nlp.sempre.Frog.make (string "x"))))
+(rule $Expr (inventory) (ConstantFn (call actor.ali.linh.input.ShowInventory.apply (string "x"))))

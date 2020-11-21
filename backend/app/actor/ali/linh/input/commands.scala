@@ -6,4 +6,4 @@ import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
 import com.typesafe.scalalogging.Logger
 
-case class ShowInventory()
+case class ShowInventory(val x:String)
