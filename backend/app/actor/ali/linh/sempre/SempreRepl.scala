@@ -21,13 +21,7 @@ object SempreRepl extends App {
     while (true) {
         val q = StdIn.readLine("Enter text:")
         log.info("Parsing...");
-        val r: SempreResponse = client.parse(q)
-        Try {
-            log.info(s"Derivation: ${r.getDerivation}");
-            log.info(s"Answer: ${r.getAnswer}");
-        } match {
-            case Success(_) => // Do nothing
-            case Failure(e) => log.warn(s"Could not parse: ${e.getMessage}")
-        }
+        val r = client.parse(q)
+        log.info(s"Parsed command: ${r}");
     }
 }

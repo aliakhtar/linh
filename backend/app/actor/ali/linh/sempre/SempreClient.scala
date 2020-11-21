@@ -1,6 +1,7 @@
 package actor.ali.linh.sempre
 
 import actor.ali.linh.config.Env
+import actor.ali.linh.input.Command
 
 import scala.collection.parallel.CollectionConverters._
 import scala.jdk.CollectionConverters._
@@ -33,7 +34,7 @@ class SempreClient(env: Env) {
     builder.buildUnspecified()
 
 
-    def parse(query: String):SempreResponse= {
+    private def parseRaw(query: String):SempreResponse= {
         val b: Example.Builder = new  Example.Builder()
         b.setId("session:1")
         b.setUtterance( Preprocessor.process(query))
@@ -48,6 +49,25 @@ class SempreClient(env: Env) {
         response.candidateIndex = 0
 
         response
+    }
 
+    def parse(cmd: String):Option[Command] = {
+        if (cmd.isBlank)
+            return None
+
+        val resp = parseRaw(cmd)
+        val predictions = resp.getExample.predDerivations.asScala.toSeq
+
+        if (predictions.isEmpty) {
+            log.warn(s"No predictions for $cmd");
+            return None
+        }
+
+        resp.getDerivation.value match {
+            case CommandValue(cmd) => Some(cmd)
+            case other =>
+                log.warn(s"Unexpected result: $other");
+                None
+        }
     }
 }
