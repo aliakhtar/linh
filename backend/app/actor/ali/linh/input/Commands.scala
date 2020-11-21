@@ -27,4 +27,16 @@ object Commands {
 
     def newOrder(name: String, qty: Double): CommandValue = wrap(NewOrder(name, qty))
 
+    def storeRevenue(): CommandValue = wrap(HowMuchStoreRevenue())
+    def itemRevenue(name: String): CommandValue = wrap(HowMuchItemRevenue(name))
+
+
+    def storeOrders(): CommandValue = wrap(HowManyStoreOrders())
+    def itemOrders(name: String): CommandValue = wrap(HowManyItemOrders(name))
+
+    def bestSellers(): CommandValue = wrap(BestSellers())
+    def worstSellers(): CommandValue = wrap(WorstSellers())
+
+    def whatToBuy(): CommandValue = wrap(WhatShouldIBuy())
+    def howMuchToBuy(name: String): CommandValue = wrap(HowMuchShouldIBuy(name))
 }

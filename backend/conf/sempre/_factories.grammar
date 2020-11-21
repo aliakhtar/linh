@@ -5,3 +5,16 @@
 (def @addToStock Commands.addToStock)
 (def @changePrice Commands.changePrice)
 (def @newOrder Commands.newOrder)
+
+(def @storeRevenue Commands.storeRevenue)
+(def @itemRevenue Commands.itemRevenue)
+
+(def @storeOrders Commands.storeOrders)
+(def @itemOrders Commands.itemOrders)
+
+(def @bestSellers Commands.bestSellers)
+(def @worstSellers Commands.worstSellers)
+
+
+(def @whatToBuy Commands.whatToBuy)
+(def @howMuchToBuy Commands.howMuchToBuy)

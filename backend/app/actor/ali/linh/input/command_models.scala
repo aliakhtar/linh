@@ -18,3 +18,15 @@ case class AddToStock(name: String, qty: Double) extends Command
 case class ChangePrice(name: String, newPrice: Double) extends Command
 
 case class NewOrder(name: String, qty: Double) extends Command
+
+case class HowMuchStoreRevenue() extends Command
+case class HowMuchItemRevenue(name: String) extends Command
+
+case class HowManyStoreOrders() extends Command
+case class HowManyItemOrders(name: String) extends Command
+
+case class BestSellers() extends Command
+case class WorstSellers() extends Command
+
+case class WhatShouldIBuy() extends Command
+case class HowMuchShouldIBuy(name: String) extends Command
