@@ -21,8 +21,8 @@ class SempreClient(env: Env) {
     private val builder = new Builder
     private val dataset = new Dataset
     private val grammar = new Grammar
-    //private val analyzer = new CoreNLPAnalyzer
-    private val analyzer = new SimpleAnalyzer
+    private val analyzer = new CoreNLPAnalyzer
+    //private val analyzer = new SimpleAnalyzer
     LanguageAnalyzer.setSingleton(this.analyzer)
 
     grammar.read(env.conf.sempre.grammarFile)
