@@ -7,4 +7,4 @@ import scala.util.{Failure, Success, Try}
 import com.typesafe.scalalogging.Logger
 
 sealed trait Command
-case class ShowInventory(val x:String) extends Command
+case class ShowInventory() extends Command

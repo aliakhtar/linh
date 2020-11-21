@@ -10,5 +10,5 @@ object Commands {
 
     private val log = Logger("Commands")
 
-    def showInv(): ShowInventory = ShowInventory("")
+    def showInv(): ShowInventory = ShowInventory()
 }
