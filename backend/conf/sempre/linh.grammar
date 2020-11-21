@@ -1,5 +1,8 @@
 (include "_factories.grammar")
 
-(rule $cmd ((show) (inventory)) (ConstantFn (call @showInv)) )
+(rule $me ($TOKEN) (FilterPosTagFn token PRP PRP$))
+(rule $the ($TOKEN) (FilterPosTagFn token DT))
+
+(rule $cmd ((show) ($me optional) ($the optional) (inventory)) (ConstantFn (call @showInv)) )
 
 (rule $ROOT ($cmd) (IdentityFn))
