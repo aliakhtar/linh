@@ -11,7 +11,7 @@
 
 # Items
 (rule $itemRefStart (($of) ($the optional)) (ConstantFn (lambda x (call @itemRef (var x)))))
-(rule $item ($itemRefStart $LEMMA_TOKEN) (JoinFn forward))
+(rule $item ($itemRefStart $TOKEN) (JoinFn forward))
 (rule $cmd ($item) (IdentityFn))
 
 # Dates
@@ -23,12 +23,10 @@
 # Show inventory of apples:
 (rule $cmd ($showInv $item) (lambda s (lambda x (call @showInvItem (var x)))))
 
-
 # How many apples remaining
-(rule $showInv ((how) (many) $LEMMA_TOKEN (are optional) (left optional)) (lambda i (call @showInvItem (var i))))
-(rule $showInv ((how) (many) $LEMMA_TOKEN (is optional) (left optional)) (lambda i (call @showInvItem (var i))))
+(rule $cmd ((how) (many) $TOKEN (are optional) (left optional)) (lambda i (call @showInvItem (var i))))
+(rule $cmd ((how) (many) $TOKEN (is optional) (left optional)) (lambda i (call @showInvItem (var i))))
 
-# How much remaining
 
 # Bought 5 apples
 
