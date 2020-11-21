@@ -1,7 +1,7 @@
 package actor.ali.linh.sempre
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{AddToStock, Command, ItemRef, ShowInventoryAllStore, ShowInventoryItem}
+import actor.ali.linh.input.{AddToStock, ChangePrice, Command, ItemRef, ShowInventoryAllStore, ShowInventoryItem}
 import com.typesafe.scalalogging.Logger
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest._
@@ -48,6 +48,19 @@ class SempreClientTest extends AnyFunSuite with Matchers {
     test("add to stock") {
         check(AddToStock("apples", 10), "bought", "10", "apples")
         check(AddToStock("apples", 100), "bought", "100", "of", "apples")
+    }
+
+    test("set price") {
+        check(ChangePrice("apple", 10),"set", "apple", "price", "to", "10")
+        check(ChangePrice("apple", 10),"set", "apple", "price", "to", "$10")
+
+        check(ChangePrice("apple", 20), "apple", "price", "to", "20")
+        check(ChangePrice("apple", 20), "apple", "price", "to", "$20")
+
+        check(ChangePrice("apple", 30), "apple", "price",  "30")
+        check(ChangePrice("apple", 30), "apple", "price",  "$30")
+
+        check(ChangePrice("nailpolish", 40.5), "set", "nailpolish", "price", "to", "$40.50")
     }
 
 

@@ -35,6 +35,7 @@
 (rule $cmd ((bought) $number (of optional) $TOKEN) (lambda q (lambda n (call @addToStock (var n) (var q)))))
 
 # Apple price $100 each
+(rule $cmd ((set optional) $TOKEN (price) (to optional) $number) (lambda n (lambda p (call @changePrice (var n) (var p)))))
 
 # Sold 3 apples
 

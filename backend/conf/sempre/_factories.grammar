@@ -3,3 +3,4 @@
 (def @itemRef Commands.itemRef)
 
 (def @addToStock Commands.addToStock)
+(def @changePrice Commands.changePrice)

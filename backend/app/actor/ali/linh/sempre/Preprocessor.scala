@@ -15,7 +15,10 @@ object Preprocessor {
         "are" -> Set("is"),
         "many" -> Set("much"),
 
-        "bought" -> Set("buy", "purchased", "purchase", "acquired", "buying")
+        "bought" -> Set("buy", "purchased", "purchase", "acquired", "buying"),
+        "set" -> Set("change"),
+        "price" -> Set("prices", "cost", "costs"),
+        //"new" -> Set("current")
     )
 
 
@@ -33,7 +36,9 @@ object Preprocessor {
     }
 
     def process(input: String):String = {
-        val tokens = input.trim.toLowerCase.split(" ")
+        val tokens = input.trim.toLowerCase
+            .replaceAll("\\$", "")
+            .split(" ")
         tokens.map(mapSyn).mkString(" ")
     }
 

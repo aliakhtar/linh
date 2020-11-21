@@ -23,5 +23,6 @@ object Commands {
     def showInvItem(item: String): CommandValue = wrap(ShowInventoryItem(item))
 
     def addToStock(name: String, qty: Double): CommandValue = wrap(AddToStock(name, qty))
+    def changePrice(name: String, newPrice: Double): CommandValue = wrap(ChangePrice(name, newPrice))
 
 }
