@@ -6,5 +6,9 @@ import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
 import com.typesafe.scalalogging.Logger
 
-sealed trait Command
-case class ShowInventory(val x:String) extends Command
+object Commands {
+
+    private val log = Logger("Commands")
+
+    def showInv(): ShowInventory = ShowInventory("")
+}

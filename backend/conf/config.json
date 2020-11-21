@@ -1,5 +1,5 @@
 {
   "sempre":{
-    "grammar_file": "./conf/sempre/inventory.grammar"
+    "grammar_file": "./conf/sempre/linh.grammar"
   }
 }

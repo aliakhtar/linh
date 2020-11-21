@@ -1,0 +1,3 @@
+(def @test actor.ali.linh.input.ShowInventory.apply)
+
+(rule $ROOT (hello) (ConstantFn (call @test (string "x"))))
