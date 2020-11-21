@@ -17,6 +17,15 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-collection-compat" % "
 libraryDependencies += "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.0"
 
 
+
+libraryDependencies ++= Seq(
+    //json4s native:
+    "org.json4s" %% "json4s-native" % "3.6.9",
+    "org.json4s" %% "json4s-jackson" % "3.6.9",
+    "org.json4s" %% "json4s-ext" % "3.6.9",
+)
+
+
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
 libraryDependencies += "org.scalatest" % "scalatest_2.13" % "3.2.3" % "test"
 

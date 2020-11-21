@@ -17,7 +17,8 @@ class SempreClient {
     private val builder = new Builder
     private val dataset = new Dataset
     private val grammar = new Grammar
-    private val analyzer = new CoreNLPAnalyzer
+    //private val analyzer = new CoreNLPAnalyzer
+    private val analyzer = new SimpleAnalyzer
     LanguageAnalyzer.setSingleton(this.analyzer)
 
     builder.grammar = grammar
