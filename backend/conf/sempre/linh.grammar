@@ -8,11 +8,12 @@
 # Other smaller compositionals:
 
 (rule $itemRefStart (($of) ($the optional)) (ConstantFn (lambda x (call @itemRef (var x)))))
-(rule $cmd ($itemRefStart $LEMMA_TOKEN) (JoinFn forward))
+(rule $item ($itemRefStart $LEMMA_TOKEN) (JoinFn forward))
+(rule $cmd ($item) (IdentityFn))
 
 (rule $showInv ((show) ($me optional) ($the optional) (inventory)) (ConstantFn (call @showInv)) )
 (rule $cmd ($showInv) (IdentityFn))
-#(rule $cmd ($showInv $itemRefStart) (ConstantFn (lambda x (call @showInvItem (var x)))))
+(rule $cmd ($showInv $item) (ConstantFn (lambda x (call @showInvItem (var x)))))
 
 
 (rule $ROOT ($cmd) (IdentityFn))
