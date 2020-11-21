@@ -27,8 +27,8 @@
 (rule $cmd ($showInv $item) (lambda s (lambda x (call @showInvItem (var x)))))
 
 # How many apples remaining
-(rule $cmd ((how) (many) $TOKEN (are optional) (left optional)) (lambda i (call @showInvItem (var i))))
-(rule $cmd ((how) (many) $TOKEN (is optional) (left optional)) (lambda i (call @showInvItem (var i))))
+(rule $cmd ((how) (many) $TOKEN (are optional) (left)) (lambda i (call @showInvItem (var i))))
+(rule $cmd ((how) (many) $TOKEN (is optional) (left)) (lambda i (call @showInvItem (var i))))
 
 
 # Bought 5 apples
@@ -48,6 +48,10 @@
 # How much money from apples
 
 # How many orders
+
+# How much revenue
+(rule $cmd ((how) (many) (total optional) (orders)) (ConstantFn (call @storeOrders)))
+(rule $cmd ((how) (many) (total optional) (orders)) (ConstantFn (call @storeOrders)))
 
 
 

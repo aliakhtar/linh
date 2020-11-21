@@ -20,6 +20,7 @@ object Preprocessor {
         "price" -> Set("prices", "cost", "costs"),
         "sold" -> Set("sell"),
         "revenue" -> Set("money"),
+        "orders" -> Set("order", "sales", "sale"),
 
         //"new" -> Set("current")
     )
