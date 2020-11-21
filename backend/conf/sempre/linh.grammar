@@ -1,8 +1,18 @@
 (include "_factories.grammar")
 
+#POS
 (rule $me ($TOKEN) (FilterPosTagFn token PRP PRP$))
 (rule $the ($TOKEN) (FilterPosTagFn token DT))
+(rule $of ($TOKEN) (FilterPosTagFn token IN))
 
-(rule $cmd ((show) ($me optional) ($the optional) (inventory)) (ConstantFn (call @showInv)) )
+# Other smaller compositionals:
+
+(rule $itemRefStart (($of) ($the optional)) (ConstantFn (lambda x (call @itemRef (var x)))))
+(rule $cmd ($itemRefStart $LEMMA_TOKEN) (JoinFn forward))
+
+(rule $showInv ((show) ($me optional) ($the optional) (inventory)) (ConstantFn (call @showInv)) )
+(rule $cmd ($showInv) (IdentityFn))
+#(rule $cmd ($showInv $itemRefStart) (ConstantFn (lambda x (call @showInvItem (var x)))))
+
 
 (rule $ROOT ($cmd) (IdentityFn))

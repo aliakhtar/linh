@@ -1,7 +1,7 @@
 package actor.ali.linh.sempre
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{Command, ShowInventory}
+import actor.ali.linh.input.{Command, ItemRef, ShowInventoryAllStore, ShowInventoryItem}
 import com.typesafe.scalalogging.Logger
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest._
@@ -23,11 +23,16 @@ class SempreClientTest extends AnyFunSuite with Matchers {
     private val client = new SempreClient(Env.instance)
 
     test("stock") {
-        check(ShowInventory(), "show", "inventory")
-        checkRaw(ShowInventory(), "show inventories")
-        checkRaw(ShowInventory(), "show me inventory")
-        checkRaw(ShowInventory(), "show me the inventory")
-        checkRaw(ShowInventory(), "show the inventory")
+        check(ShowInventoryAllStore(), "show", "inventory")
+        checkRaw(ShowInventoryAllStore(), "show inventories")
+        checkRaw(ShowInventoryAllStore(), "show me inventory")
+        checkRaw(ShowInventoryAllStore(), "show me the inventory")
+        checkRaw(ShowInventoryAllStore(), "show the inventory")
+        //checkRaw(ShowInventoryItem(ItemRef("apple")), "show inventory of apples")
+    }
+
+    test("item ref") {
+        checkRaw(ItemRef("apple"), "of apple")
     }
 
 

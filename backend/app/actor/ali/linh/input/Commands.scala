@@ -14,5 +14,11 @@ object Commands {
 
     private def wrap(c: Command):CommandValue = new CommandValue(c)
 
-    def showInv(): CommandValue = wrap(ShowInventory())
+
+    def itemRef(name: String): CommandValue = wrap(ItemRef(name))
+
+    def showInv(): CommandValue = wrap(ShowInventoryAllStore())
+
+    def showInv(item: CommandValue): CommandValue = wrap(ShowInventoryItem(item.v.asInstanceOf[ItemRef]))
+
 }
