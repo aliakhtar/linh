@@ -1,7 +1,7 @@
 package actor.ali.linh.sempre
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{AddToStock, ChangePrice, Command, HowManyStoreOrders, HowMuchStoreRevenue, ItemRef, NewOrder, ShowInventoryAllStore, ShowInventoryItem}
+import actor.ali.linh.input.{AddToStock, ChangePrice, Command, HowManyItemOrders, HowManyStoreOrders, HowMuchItemRevenue, HowMuchStoreRevenue, ItemRef, NewOrder, ShowInventoryAllStore, ShowInventoryItem}
 import com.typesafe.scalalogging.Logger
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest._
@@ -76,6 +76,17 @@ class SempreClientTest extends AnyFunSuite with Matchers {
 
         check(HowManyStoreOrders(), "how", "many", "orders")
         check(HowManyStoreOrders(), "how", "many", "total", "orders")
+    }
+
+    test("item revenue and orders") {
+        check(HowMuchItemRevenue("apples"), "how", "much", "revenue", "from", "apples")
+        check(HowMuchItemRevenue("apples"), "how", "much", "total", "revenue", "from", "apples")
+        check(HowMuchItemRevenue("apples"), "how", "much", "revenue", "by", "apples")
+        check(HowMuchItemRevenue("apples"), "how", "much", "total", "revenue", "by", "apples")
+
+        check(HowManyItemOrders("apples"), "how", "many", "orders", "of", "apples")
+        check(HowManyItemOrders("apples"), "how", "many", "total", "orders", "of", "apples")
+
     }
 
     //noinspection SameParameterValue

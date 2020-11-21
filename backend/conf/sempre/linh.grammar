@@ -43,20 +43,17 @@
 
 # How much revenue
 (rule $cmd ((how) (much) (total optional) (revenue)) (ConstantFn (call @storeRevenue)))
-(rule $cmd ((how) (much) (total optional) (money)) (ConstantFn (call @storeRevenue)))
 
 # How much money from apples
+(rule $cmd ((how) (much) (total optional) (revenue) (from) $TOKEN) (lambda i (call @itemRevenue (var i))))
+(rule $cmd ((how) (much) (total optional) (revenue) (by) $TOKEN) (lambda i (call @itemRevenue (var i))))
+
 
 # How many orders
-
-# How much revenue
 (rule $cmd ((how) (many) (total optional) (orders)) (ConstantFn (call @storeOrders)))
-(rule $cmd ((how) (many) (total optional) (orders)) (ConstantFn (call @storeOrders)))
-
-
 
 # How many apple orders
-
+(rule $cmd ((how) (many) (total optional) (orders) (of) $TOKEN) (lambda i (call @itemOrders (var i))))
 
 # Most popular items
 
