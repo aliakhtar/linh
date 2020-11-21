@@ -21,6 +21,8 @@ object Preprocessor {
         "sold" -> Set("sell"),
         "revenue" -> Set("money"),
         "orders" -> Set("order", "sales", "sale"),
+        "best" -> Set("highest", "high"),
+        "worst" -> Set("lowest", "low"),
 
         //"new" -> Set("current")
     )

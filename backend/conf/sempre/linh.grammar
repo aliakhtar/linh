@@ -56,10 +56,24 @@
 (rule $cmd ((how) (many) (total optional) (orders) (of) $TOKEN) (lambda i (call @itemOrders (var i))))
 
 # Most popular items
+(rule $cmd ((best) (sellers)) (ConstantFn (call @bestSellers)))
+(rule $cmd ((best) (selling)) (ConstantFn (call @bestSellers)))
+(rule $cmd ((most optional) (popular)) (ConstantFn (call @bestSellers)))
+
 
 # Least popular items
+(rule $cmd ((worst) (sellers)) (ConstantFn (call @worstSellers)))
+(rule $cmd ((worst) (selling)) (ConstantFn (call @worstSellers)))
+(rule $cmd ((least) (popular)) (ConstantFn (call @worstSellers)))
+
+# What should I buy
+(rule $cmd ((what) (should) (i) (buy)) (ConstantFn (call @whatToBuy)))
+(rule $cmd ((what) (should) (we) (buy)) (ConstantFn (call @whatToBuy)))
+(rule $cmd ((what) (to) (buy)) (ConstantFn (call @whatToBuy)))
+
 
 # Should I buy more apples
+(rule $cmd ((should) (i) (buy) (more optional) $TOKEN) (lambda i (call @howMuchToBuy (var i))))
 
 (rule $ROOT ($cmd) (IdentityFn))
 

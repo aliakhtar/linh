@@ -1,7 +1,7 @@
 package actor.ali.linh.sempre
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{AddToStock, ChangePrice, Command, HowManyItemOrders, HowManyStoreOrders, HowMuchItemRevenue, HowMuchStoreRevenue, ItemRef, NewOrder, ShowInventoryAllStore, ShowInventoryItem}
+import actor.ali.linh.input.{AddToStock, BestSellers, ChangePrice, Command, HowManyItemOrders, HowManyStoreOrders, HowMuchItemRevenue, HowMuchStoreRevenue, ItemRef, NewOrder, ShowInventoryAllStore, ShowInventoryItem, WorstSellers}
 import com.typesafe.scalalogging.Logger
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest._
@@ -86,6 +86,20 @@ class SempreClientTest extends AnyFunSuite with Matchers {
 
         check(HowManyItemOrders("apples"), "how", "many", "orders", "of", "apples")
         check(HowManyItemOrders("apples"), "how", "many", "total", "orders", "of", "apples")
+    }
+
+    test("best and least popular sellers") {
+        check(BestSellers(), "best", "sellers")
+        check(BestSellers(), "best", "selling")
+        check(BestSellers(), "most", "popular")
+        check(BestSellers(),  "popular")
+
+        check(WorstSellers(), "worst", "sellers")
+        check(WorstSellers(), "worst", "selling")
+        check(WorstSellers(), "least", "popular")
+    }
+
+    test("what to buy") {
 
     }
 
