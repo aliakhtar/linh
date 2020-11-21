@@ -10,7 +10,10 @@ object Preprocessor {
 
     private val syns = Map(
         "show" -> Set("display", "view", "render", "check", "show"),
-        "inventory" -> Set("inv", "stock", "quantity", "qty", "inventories", "stocks")
+        "inventory" -> Set("inv", "stock", "quantity", "qty", "inventories", "stocks"),
+        "left" -> Set("remaining"),
+        "are" -> Set("is"),
+        "many" -> Set("much"),
     )
 
 

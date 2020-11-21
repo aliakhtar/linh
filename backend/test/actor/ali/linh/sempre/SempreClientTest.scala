@@ -31,6 +31,9 @@ class SempreClientTest extends AnyFunSuite with Matchers {
         checkRaw(ShowInventoryItem("apple"), "show inventory of apples")
         checkRaw(ShowInventoryItem("apple"), "show inventory of the apples")
         checkRaw(ShowInventoryItem("ball"), "show inventory of the balls")
+
+        check(ShowInventoryItem("apple"), "how",  "many", "apples", "left")
+        check(ShowInventoryItem("apple"), "how",  "many", "apples", "are", "left")
     }
 
     test("item ref") {
