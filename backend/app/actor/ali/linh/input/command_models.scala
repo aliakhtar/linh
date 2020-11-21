@@ -7,8 +7,10 @@ import scala.util.{Failure, Success, Try}
 import com.typesafe.scalalogging.Logger
 
 sealed trait Command
-case class ItemRef(name: String) extends Command
+case class ItemRef(name: String) extends Command {
+    override def toString: String = name
+}
 
 case class ShowInventoryAllStore() extends Command
-case class ShowInventoryItem(item: ItemRef) extends Command
+case class ShowInventoryItem(item: String) extends Command
 

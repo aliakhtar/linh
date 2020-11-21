@@ -13,7 +13,8 @@
 
 (rule $showInv ((show) ($me optional) ($the optional) (inventory)) (ConstantFn (call @showInv)) )
 (rule $cmd ($showInv) (IdentityFn))
-(rule $cmd ($showInv $item) (ConstantFn (lambda x (call @showInvItem (var x)))))
+(rule $cmd ($showInv $item) (lambda s (lambda x (call @showInvItem (var x)))))
 
 
 (rule $ROOT ($cmd) (IdentityFn))
+

@@ -19,6 +19,6 @@ object Commands {
 
     def showInv(): CommandValue = wrap(ShowInventoryAllStore())
 
-    def showInv(item: CommandValue): CommandValue = wrap(ShowInventoryItem(item.v.asInstanceOf[ItemRef]))
+    def showInvItem(item: CommandValue): CommandValue = wrap(ShowInventoryItem(item.v.asInstanceOf[ItemRef].name))
 
 }
