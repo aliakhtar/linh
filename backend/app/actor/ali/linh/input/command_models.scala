@@ -14,3 +14,4 @@ case class ItemRef(name: String) extends Command {
 case class ShowInventoryAllStore() extends Command
 case class ShowInventoryItem(item: String) extends Command
 
+case class AddToStock(name: String, qty: Double) extends Command

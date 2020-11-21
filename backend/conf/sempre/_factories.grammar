@@ -1,3 +1,5 @@
 (def @showInv Commands.showInv)
 (def @showInvItem Commands.showInvItem)
 (def @itemRef Commands.itemRef)
+
+(def @addToStock Commands.addToStock)

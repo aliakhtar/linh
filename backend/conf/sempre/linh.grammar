@@ -7,6 +7,9 @@
 (rule $is ($TOKEN) (FilterPosTagFn token VBP VBZ))
 (rule $many ($TOKEN) (FilterPosTagFn token JJ JJR))
 
+# Numbers
+(rule $number ($TOKEN) (NumberFn))
+
 # Other smaller compositionals:
 
 # Items
@@ -29,6 +32,7 @@
 
 
 # Bought 5 apples
+(rule $cmd ((bought) $number (of optional) $TOKEN) (lambda q (lambda n (call @addToStock (var n) (var q)))))
 
 # Apple price $100 each
 

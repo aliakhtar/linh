@@ -14,6 +14,8 @@ object Preprocessor {
         "left" -> Set("remaining"),
         "are" -> Set("is"),
         "many" -> Set("much"),
+
+        "bought" -> Set("buy", "purchased", "purchase", "acquired", "buying")
     )
 
 
