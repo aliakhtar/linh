@@ -36,7 +36,7 @@ class SempreClient(env: Env) {
     def parse(query: String):SempreResponse= {
         val b: Example.Builder = new  Example.Builder()
         b.setId("session:1")
-        b.setUtterance(query)
+        b.setUtterance( Preprocessor.process(query))
         val ex: Example = b.createExample
         val response: SempreResponse = new SempreResponse(builder)
 
