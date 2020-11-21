@@ -1,3 +1,6 @@
 (include "_factories.grammar")
 
-(rule $ROOT (hello) (ConstantFn (call @test)))
+
+(rule $cmd ((show) (inventory)) (ConstantFn (call @showInv)) )
+
+(rule $ROOT ($cmd) (IdentityFn))
