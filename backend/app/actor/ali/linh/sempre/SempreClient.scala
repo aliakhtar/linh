@@ -16,8 +16,11 @@ import edu.stanford.nlp.sempre.Master._
 class SempreClient(env: Env) {
     private val log = Logger[SempreClient]
 
-
     log.info(s"Grammar file: ${env.conf.sempre.grammarFile}");
+
+    JavaExecutor.opts.classPathPrefix = "actor.ali.linh.input"
+
+
     private val builder = new Builder
     private val dataset = new Dataset
     private val grammar = new Grammar
