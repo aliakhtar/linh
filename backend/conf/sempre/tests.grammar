@@ -2,5 +2,6 @@
 (rule $Function (yolo) (ConstantFn (lambda x (call edu.stanford.nlp.sempre.Frog.make (var x)))))
 (rule $Expr ($Function $PHRASE) (JoinFn forward))
 #(rule $Function (yolo) (ConstantFn (lambda x (var x))))
+#(rule $Expr (food) (ConstantFn (call edu.stanford.nlp.sempre.Frog.make (string "x"))))
 
 
