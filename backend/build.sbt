@@ -17,6 +17,9 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-collection-compat" % "
 libraryDependencies += "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.0"
 
 
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
+libraryDependencies += "org.scalatest" % "scalatest_2.13" % "3.2.3" % "test"
+
 
 unmanagedResourceDirectories in Test +=  (baseDirectory.value / "target/web/public/test")
 
