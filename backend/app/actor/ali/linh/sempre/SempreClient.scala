@@ -1,5 +1,7 @@
 package actor.ali.linh.sempre
 
+import actor.ali.linh.config.Env
+
 import scala.collection.parallel.CollectionConverters._
 import scala.jdk.CollectionConverters._
 import scala.concurrent.duration._
@@ -11,9 +13,11 @@ import edu.stanford.nlp.sempre.Master
 import edu.stanford.nlp.sempre.Master._
 
 
-class SempreClient {
+class SempreClient(env: Env) {
     private val log = Logger[SempreClient]
 
+
+    log.info(s"Grammar file: ${env.conf.sempre.grammarFile}");
     private val builder = new Builder
     private val dataset = new Dataset
     private val grammar = new Grammar
