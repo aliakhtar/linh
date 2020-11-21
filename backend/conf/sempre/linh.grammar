@@ -69,6 +69,8 @@
 # What should I buy
 (rule $cmd ((what) (should) (i) (buy)) (ConstantFn (call @whatToBuy)))
 (rule $cmd ((what) (should) (we) (buy)) (ConstantFn (call @whatToBuy)))
+(rule $cmd ((what) (do) (i) (need)) (ConstantFn (call @whatToBuy)))
+(rule $cmd ((what) (do) (we) (need)) (ConstantFn (call @whatToBuy)))
 (rule $cmd ((what) (to) (buy)) (ConstantFn (call @whatToBuy)))
 
 

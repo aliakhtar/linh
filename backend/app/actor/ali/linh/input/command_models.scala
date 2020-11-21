@@ -29,4 +29,4 @@ case class BestSellers() extends Command
 case class WorstSellers() extends Command
 
 case class WhatShouldIBuy() extends Command
-case class HowMuchShouldIBuy(name: String) extends Command
+case class HowMuchToBuy(name: String) extends Command

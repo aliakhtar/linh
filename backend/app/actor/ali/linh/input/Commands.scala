@@ -38,5 +38,5 @@ object Commands {
     def worstSellers(): CommandValue = wrap(WorstSellers())
 
     def whatToBuy(): CommandValue = wrap(WhatShouldIBuy())
-    def howMuchToBuy(name: String): CommandValue = wrap(HowMuchShouldIBuy(name))
+    def howMuchToBuy(name: String): CommandValue = wrap(HowMuchToBuy(name))
 }
