@@ -1,6 +1,5 @@
 (include "_factories.grammar")
 
-
 (rule $cmd ((show) (inventory)) (ConstantFn (call @showInv)) )
 
 (rule $ROOT ($cmd) (IdentityFn))

@@ -24,6 +24,7 @@ class SempreClientTest extends AnyFunSuite with Matchers {
 
     test("stock") {
         check(ShowInventory(), "show", "inventory")
+        checkRaw(ShowInventory(), "show inventories")
     }
 
 
@@ -34,10 +35,12 @@ class SempreClientTest extends AnyFunSuite with Matchers {
             Preprocessor.getSyns(w).map(syn => cmd.replace(w, syn))
         })
 
-        variations.foreach(i => {
-            log.info(s"Checking ${i} against $expected");
-            client.parse(i) should be(Some(expected))
-        })
+        variations.foreach(i => checkRaw(expected, i))
+    }
+
+    private def checkRaw(expected: Command, input: String):Unit = {
+        log.info(s"Checking ${input} against $expected");
+        client.parse(input) should be(Some(expected))
     }
 
 }
