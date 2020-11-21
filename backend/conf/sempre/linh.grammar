@@ -38,6 +38,7 @@
 (rule $cmd ((set optional) $TOKEN (price) (to optional) $number) (lambda n (lambda p (call @changePrice (var n) (var p)))))
 
 # Sold 3 apples
+(rule $cmd ((sold) $number (of optional) $TOKEN) (lambda q (lambda n (call @newOrder (var n) (var q)))))
 
 # How much money from apples
 

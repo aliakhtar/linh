@@ -4,3 +4,4 @@
 
 (def @addToStock Commands.addToStock)
 (def @changePrice Commands.changePrice)
+(def @newOrder Commands.newOrder)

@@ -18,6 +18,7 @@ object Preprocessor {
         "bought" -> Set("buy", "purchased", "purchase", "acquired", "buying"),
         "set" -> Set("change"),
         "price" -> Set("prices", "cost", "costs"),
+        "sold" -> Set("sell")
         //"new" -> Set("current")
     )
 

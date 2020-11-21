@@ -25,4 +25,6 @@ object Commands {
     def addToStock(name: String, qty: Double): CommandValue = wrap(AddToStock(name, qty))
     def changePrice(name: String, newPrice: Double): CommandValue = wrap(ChangePrice(name, newPrice))
 
+    def newOrder(name: String, qty: Double): CommandValue = wrap(NewOrder(name, qty))
+
 }

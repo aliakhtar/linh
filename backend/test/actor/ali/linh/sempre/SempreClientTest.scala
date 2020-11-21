@@ -1,7 +1,7 @@
 package actor.ali.linh.sempre
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{AddToStock, ChangePrice, Command, ItemRef, ShowInventoryAllStore, ShowInventoryItem}
+import actor.ali.linh.input.{AddToStock, ChangePrice, Command, ItemRef, NewOrder, ShowInventoryAllStore, ShowInventoryItem}
 import com.typesafe.scalalogging.Logger
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest._
@@ -63,6 +63,12 @@ class SempreClientTest extends AnyFunSuite with Matchers {
         check(ChangePrice("nailpolish", 40.5), "set", "nailpolish", "price", "to", "$40.50")
     }
 
+
+
+    test("new order") {
+        check(NewOrder("apples", 10), "sold", "10", "apples")
+        check(NewOrder("apples", 100), "sold", "100", "of", "apples")
+    }
 
     //noinspection SameParameterValue
     private def check(expected: Command, words: String*):Unit = {
