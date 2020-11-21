@@ -6,6 +6,11 @@
 (rule $Expr ($Expr $Partial) (JoinFn backward))
 (rule $ROOT ((what optional) (is optional) $Expr (? optional)) (IdentityFn))
 
+(rule $ROOT ($Expr) (IdentityFn))
+
 # Example of ambiguity to demonstrate learning
 (rule $Operator (and) (ConstantFn (lambda y (lambda x (call * (var x) (var y))))))
 (rule $Operator (and) (ConstantFn (lambda y (lambda x (call + (var x) (var y))))))
+
+(rule $Function (length of) (ConstantFn (lambda x (call .length (var x)))))
+(rule $Expr ($Function $PHRASE) (JoinFn forward))
