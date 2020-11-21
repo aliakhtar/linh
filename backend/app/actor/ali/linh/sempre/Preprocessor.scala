@@ -13,12 +13,14 @@ object Preprocessor {
         "inventory" -> Set("inv", "stock", "quantity", "qty", "inventories", "stocks"),
         "left" -> Set("remaining"),
         "are" -> Set("is"),
-        "many" -> Set("much"),
+        //"many" -> Set("much"),
 
         "bought" -> Set("buy", "purchased", "purchase", "acquired", "buying"),
         "set" -> Set("change"),
         "price" -> Set("prices", "cost", "costs"),
-        "sold" -> Set("sell")
+        "sold" -> Set("sell"),
+        "revenue" -> Set("money"),
+
         //"new" -> Set("current")
     )
 

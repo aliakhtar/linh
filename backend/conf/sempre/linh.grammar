@@ -40,13 +40,19 @@
 # Sold 3 apples
 (rule $cmd ((sold) $number (of optional) $TOKEN) (lambda q (lambda n (call @newOrder (var n) (var q)))))
 
-# How much money from apples
 
 # How much revenue
+(rule $cmd ((how) (much) (total optional) (revenue)) (ConstantFn (call @storeRevenue)))
+(rule $cmd ((how) (much) (total optional) (money)) (ConstantFn (call @storeRevenue)))
+
+# How much money from apples
+
+# How many orders
+
+
 
 # How many apple orders
 
-# How many orders
 
 # Most popular items
 
