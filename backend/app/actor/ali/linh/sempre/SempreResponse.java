@@ -15,7 +15,7 @@ import java.util.Map;
 public class SempreResponse {
     // Example that was parsed, if any.
     public Example ex;
-    private Builder builder;
+    private final Builder builder;
 
     // Which derivation we're selecting to show
     int candidateIndex = -1;
@@ -55,6 +55,17 @@ public class SempreResponse {
 
     public SempreResponse(Builder b) {
         this.builder = b;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "SempreResponse{" +
+               "ex=" + ex +
+               ", candidateIndex=" + candidateIndex +
+               ", stats=" + stats +
+               ", lines=" + lines +
+               '}';
     }
 }
 
