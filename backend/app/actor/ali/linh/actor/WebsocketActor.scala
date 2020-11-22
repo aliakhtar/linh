@@ -6,9 +6,11 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 
 import actor.ali.linh.config.Env
+import actor.ali.linh.input.{AddToStock, Command}
 import actor.ali.linh.util.Json
 import actor.ali.linh.response.{Output, Suggestions}
-import actor.ali.linh.response.OutputItem.{logg, text}
+import actor.ali.linh.response.OutputItem.{logg, success, text}
+import actor.ali.linh.store.{Item, Store}
 import akka.actor.{Actor, ActorRef, PoisonPill, Props}
 import com.google.common.cache.{Cache, CacheBuilder, CacheLoader, LoadingCache}
 import play.api.Logger
@@ -24,7 +26,7 @@ class WebsocketActor(env: Env, out: ActorRef) extends Actor {
 
     //private implicit val ec: ExecutionContext = env.ioEc
 
-
+    private val store = new Store()
 
     welcome()
 
@@ -49,17 +51,45 @@ class WebsocketActor(env: Env, out: ActorRef) extends Actor {
     }
 
 
+    def processCmd(result: Command): Unit = {
+        result match {
+            case AddToStock(name, qty) =>
+                if (! store.canAdd(name)) {
+                    sendLog(s"You already have a product called <strong>${name}. Please choose another name.")
+                    return
+                }
 
-    private def processCommand(cmd: String):Unit = {
+                val item = Item(name, randNumber(), qty)
+                this.store.add(item)
+                val suggestions = (0 to 2).map(_ => randNumber()).filterNot(_ == item.price)
+                    .map(price => s"set ${name} price to \\$$price")
+                sendSuccess(s"Added <strong>$name</strong> - Price: ${item.price}", suggestions)
+        }
 
     }
 
-    private def respondWithSuggestions(cmd: String):Unit = {
+    private def parse(cmd: String):Unit = {
+        Try(env.client.parse(cmd)) match {
+            case Success(Some(result: Command)) => processCmd(result)
+            case Success(None) =>
+                sendLog()
 
+            case Failure(e) =>
+                e.printStackTrace()
+
+        }
     }
 
-    private def unknownInput(msg: String):Unit = {
-        out ! Json.render(Output.single(logg("No matches found.")))
+
+    private def sendSuccess(msg: String, suggestions: Seq[String] = Nil ):Unit = {
+        if (suggestions.isEmpty)
+            out ! Json.render(Output.single(success(msg)))
+        else
+            out ! Json.render(Output.single(success(msg), Suggestions("Suggestions", suggestions)))
+    }
+
+    private def sendLog(msg: String = "Sorry, I don't quite understand that."):Unit = {
+        out ! Json.render(Output.single(logg(msg)))
     }
 
     override def receive: Receive = {
@@ -69,7 +99,7 @@ class WebsocketActor(env: Env, out: ActorRef) extends Actor {
 
         case msg: String =>
             log.info(s"Received msg: $msg")
-            processCommand(msg)
+            parse(msg)
     }
 }
 
