@@ -104,7 +104,7 @@ class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
 
                 store.newOrder(NewOrder(name, qty))
                 sendNormal(s"Order Saved.", Seq("total revenue", s"total revenue of $name",
-                    s"total orders of $name", ))
+                    s"total orders of $name"))
         }
 
     }
