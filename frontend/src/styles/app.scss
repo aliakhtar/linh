@@ -1,0 +1,41 @@
+@use "destyle.css";
+
+@use "colors";
+@use "typography" as typ;
+@use "ui/button";
+@use "ui/link";
+
+@use "terminal";
+
+body {
+    background: colors.$body;
+    color: colors.$text;
+    font-size: typ.$size;
+    line-height: typ.$line-height;
+    font-family: typ.$human-fonts;
+}
+
+::selection {
+    background-color: colors.$accent;
+    color: colors.$terminal-bg;
+}
+
+
+
+.profile-pic {
+  background-color: colors.$photo-bg;
+  background-image: url(/assets/img/me.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  padding: 5px;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  border: 1px solid colors.$photo-border;
+}
+
+.company-link {
+  text-transform: capitalize;
+}
+

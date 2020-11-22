@@ -1,0 +1,57 @@
+@use "~src/styles/colors" as clr;
+@use "~src/styles/typography" as typ;
+
+@use "~src/styles/terminal";
+@use "../input/input.component" as cmd;
+
+@mixin bubble($min-width: 670px) {
+  background-color: clr.$output-bg;
+  border-radius: 20px;
+  padding: 1em;
+
+
+  min-width: calc(100vw - 2em);
+  max-width: 1000px;
+
+  @media(min-width: $min-width) {
+    min-width: unset;
+    padding: 1em 2em;
+
+  }
+}
+
+.output {
+  @include typ.code;
+  @include terminal.terminal-grid;
+
+  margin-bottom: 2em;
+
+  .bubble {
+    @include bubble;
+  }
+}
+
+//due to scoping issues keep these in here rather than output-component.scss
+.output-item {
+  margin-bottom: 2em;
+  word-wrap: break-word;
+}
+
+.output-item:last-child {
+  margin-bottom: 0;
+}
+
+
+.output-item a {
+  text-transform: unset; //override the lowercasing of links by default
+}
+
+
+@media (min-width: 670px) {
+
+  //Create invisible prompt to push content to the right and nest it under input
+  .output::before {
+    @include cmd.cmd-prompt;
+    visibility: hidden;
+  }
+}

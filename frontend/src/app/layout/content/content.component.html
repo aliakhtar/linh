@@ -1,0 +1,10 @@
+<main class="content">
+  <div *ngFor="let item of stack | async" [ngSwitch]="item.kind">
+    <app-input
+      *ngSwitchCase="kind.IN"
+      [item]="toCmd(item)"></app-input>
+
+    <app-output *ngSwitchCase="kind.OUT" [item]="toOutput(item)"></app-output>
+
+  </div>
+</main>

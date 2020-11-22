@@ -1,0 +1,26 @@
+
+@use "~src/styles/colors" as clr;
+@use "~src/styles/typography" as typ;
+
+@use "~src/styles/terminal";
+
+
+.cmd {
+  @include typ.human-big;
+  @include terminal.terminal-grid;
+
+  text-transform: lowercase;
+  margin-bottom: 1.0em;
+  word-break: break-word;
+}
+
+@mixin cmd-prompt() {
+  @include typ.code;
+
+  color: clr.$accent;
+  content: ">>>";
+}
+
+.cmd::before {
+  @include cmd-prompt
+}

@@ -1,0 +1,54 @@
+$size: 18px; //body font size
+$line-height: 1.556;
+
+$human-fonts: 'Montserrat', sans-serif;
+$code-fonts:  'Roboto Mono', monospace;
+
+@use "colors" as clr;
+
+strong {
+  font-weight: 700;
+}
+
+
+@mixin human() {
+  font-family: $human-fonts;
+}
+
+@mixin human-big() {
+  @include human;
+  font-size: 1.35em;
+}
+
+@mixin code() {
+  font-family: $code-fonts;
+  letter-spacing: 0.1em;
+}
+
+@mixin  code-small() {
+  @include code;
+  font-size: 0.667em;
+  letter-spacing: 0.2em;
+}
+
+@mixin button() {
+  @include human;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+}
+
+.human {
+  @include human;
+}
+
+.human-big {
+  @include human-big;
+}
+
+.code {
+  @include code;
+}
+
+.code-small, .hint {
+  @include code-small;
+}

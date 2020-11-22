@@ -1,0 +1,10 @@
+<div class="suggestions-container">
+  <div class="hint dull-2" [innerHTML]="typist.textNow"></div>
+
+  <div class="suggestions-list">
+    <button
+      class="suggestion"
+      *ngFor="let s of suggestions.items"
+      (click)="handleClick(s)">{{s}}</button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="input-box">
+
+
+  <label for="cmd" class="hint dull-2"
+          >Enter question or command:</label>
+
+  <div class="input-container">
+    <span class="shell-prompt">&gt;:</span>
+    <!-- Don't change the id, its used to scroll to bottom -->
+    <!-- Blur event is used to handle iphone 'done' -->
+    <textarea
+      #box
+      id="cmd"
+      autofocus
+      rows="1"
+      class="terminal-input"
+      [(ngModel)]="cmd"
+      (keyup.enter)="$event.preventDefault();submit(); "
+      (blur)="submit()"
+      [disabled]="isDisabled()"
+      (click)="onClick($event)"></textarea>
+  </div>
+</div>

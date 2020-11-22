@@ -1,0 +1,31 @@
+
+header {
+  display: grid;
+  grid-area: header;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "balls buttons";
+  grid-auto-flow: column;
+
+  //border: 1px solid green;
+}
+
+.balls {
+  grid-area: balls;
+}
+
+.buttons {
+  grid-area: buttons;
+  justify-self: end;
+  display: flex; //without this, the buttons get pushed to next line on smaller widths
+
+
+  //border: 1px solid white;
+}
+
+.buttons .nav-item{
+  margin-right: 2em;
+}
+
+.buttons .nav-item:last-child {
+  margin-right: 0;
+}

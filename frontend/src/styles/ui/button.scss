@@ -1,0 +1,19 @@
+
+@use "../colors";
+@use "../typography" as typ;
+
+button, a.btn{
+  @include typ.button;
+
+  display: inline-block;
+  line-height: normal;
+  padding: 0.56em 0.76em;
+  border: 1px solid colors.$accent;
+  text-align: center;
+
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+
+button:hover, button:focus {
+  background-color: colors.$hover;
+}

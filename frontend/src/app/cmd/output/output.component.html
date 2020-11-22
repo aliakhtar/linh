@@ -1,0 +1,14 @@
+<div class="output" (click)="handleClick($event)">
+  <!-- Output is split into a grid to include the invisible prompt in order to push content to right,
+  so put the actual content inside another div so that grid correctly treats it as column 2, prompt
+  being column 1-->
+  <div class="bubble">
+    <div app-output-item
+         class="output-item"
+         *ngFor="let i of readyContent" [item]="i"
+          (rendered)="onRendered(i)"></div>
+    <app-suggestions class="output-item"
+                     [suggestions]="item.suggestions" *ngIf="showSuggestions()">
+    </app-suggestions>
+  </div>
+</div>

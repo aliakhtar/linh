@@ -1,0 +1,75 @@
+@use "~src/styles/colors" as clr;
+@use "~src/styles/typography" as typ;
+
+
+.input-box {
+  grid-area: input;
+  align-self: end;
+
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: (3, 1fr);
+  grid-row-gap: 1em;
+
+  label {
+    transition: opacity 1s ease-in-out;
+  }
+
+  label.disabled {
+    opacity: 0.5; //setting to 0 might mess with the auto scroll to bottom functionality
+  }
+
+}
+
+
+.input-container {
+  position: relative;
+}
+
+.shell-prompt {
+  @include typ.code;
+
+  color: clr.$dull;
+
+  content: ">:";
+  position: absolute;
+  left: 0;
+  padding: 1em;
+  transition: color 1s ease-in-out;
+}
+
+.shell-prompt.disabled {
+  color: darken(clr.$dull, 20%);
+}
+
+
+.terminal-input {
+  @include typ.human;
+
+  border-radius: 20px;
+
+  padding: 1em 5em 1em 3em;
+  min-width: 100%;
+  max-width: 100%; //padding may push this out without this
+  min-height: 2em;
+
+  background-color: clr.$input-bg;
+  caret-color: clr.$accent;
+
+  transition: background-color 1s ease-in-out;
+  resize: none;
+}
+
+.terminal-input:focus {
+  background-image: url(/assets/img/return.svg);
+  background-position: calc(100% - 2em) 50%;
+  background-repeat: no-repeat;
+  background-size: 2em auto;
+  background-origin: padding-box;
+}
+
+.terminal-input:disabled {
+  background-color: lighten(clr.$terminal-bg, 10%) ;
+
+  //opacity: 0.5;
+}

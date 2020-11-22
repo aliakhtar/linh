@@ -1,0 +1,11 @@
+$bg-color: rgba(51, 58, 63, 0.7);
+$size: 20px;
+
+.ball {
+  display: inline-block;
+  width: $size;
+  height: $size;
+  border-radius: 50px;
+  background-color: $bg-color;
+  margin-right: 10px;
+}
