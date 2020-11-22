@@ -13,6 +13,8 @@ scalaVersion := "2.13.3"
 libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice )
 
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
+
+
 libraryDependencies += "org.scala-lang.modules" %% "scala-collection-compat" % "2.2.0"
 libraryDependencies += "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.0"
 
@@ -24,6 +26,9 @@ libraryDependencies ++= Seq(
     "org.json4s" %% "json4s-jackson" % "3.6.9",
     "org.json4s" %% "json4s-ext" % "3.6.9",
 )
+
+libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.30" % Provided
+
 
 
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test

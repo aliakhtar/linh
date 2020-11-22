@@ -1,6 +1,4 @@
-package actor.ali.response
-
-import actor.ali.search.model.Question
+package actor.ali.linh.response
 
 case class Output(content: Seq[OutputItem], suggestions: Option[Suggestions] = None)
 
@@ -16,11 +14,6 @@ case class Suggestions(label: String, items: Seq[String])
 case object Output {
     def single(o: OutputItem):Output = Output(Seq(o))
     def single(o: OutputItem, s: Suggestions):Output = Output(Seq(o), Some(s))
-
-    def answersOf(q: Question, suggestions: Option[Suggestions] = None):Output = {
-        val answers = q.answers.map(OutputItem.text)
-        Output(answers, suggestions)
-    }
 }
 
 case object OutputItem {

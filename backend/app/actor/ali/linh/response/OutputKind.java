@@ -1,4 +1,4 @@
-package actor.ali.response;
+package actor.ali.linh.response;
 
 public enum OutputKind {
     PLAIN,

@@ -1,6 +1,5 @@
-package actor.ali.response
+package actor.ali.linh.response
 
-import actor.ali.util.JsErrorsTranslator
 import play.api.libs.json.JsError
 /**
  * Represents the http response sent out if there are any validation errors.
@@ -15,10 +14,6 @@ case class Response(success: Boolean, errors: Iterable[String])
 case object Response
 {
     val Success = Response(success = true, Nil)
-    def errors(jsErr: JsError): Response = {
-        val readableErrors:Iterable[String] = JsErrorsTranslator.translate(jsErr)
-        Response(success = false, readableErrors)
-    }
 
     def errors(errors: String*): Response = {
         Response(success = false, errors)

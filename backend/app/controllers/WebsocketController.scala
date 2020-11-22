@@ -28,7 +28,7 @@ class WebsocketController @Inject()(cc : ControllerComponents)
 
         log.info("in websocketcontroller index")
         ActorFlow.actorRef { out =>
-            WebsocketActor.props(env.oracle, out)
+            WebsocketActor.props(env, out)
         }
     }
 }

@@ -1,6 +1,6 @@
 package controllers.util
 
-import actor.ali.response.{Data, Response}
+import actor.ali.linh.response.{Data, Response}
 import play.api.libs.json.{JsError, Json, OWrites}
 import play.api.mvc.{AbstractController, ControllerComponents, Result}
 
@@ -34,12 +34,6 @@ abstract class DaddyController(cc: ControllerComponents)
                 .as(jsonMimeType).withHeaders("Allow-Origin" -> "*")
     }
 
-    protected def oops(valErrors: JsError): Result = {
-        val resp = Response.errors(valErrors)
-
-        UnprocessableEntity(Json.toJson(resp))
-                .as(jsonMimeType).withHeaders("Allow-Origin" -> "*")
-    }
 
     protected def oops(e: String) : Result = {
         val resp = Response.errors(e)
