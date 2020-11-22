@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{AddToStock, Command}
+import actor.ali.linh.input.{AddToStock, ChangePrice, Command}
 import actor.ali.linh.util.Json
 import actor.ali.linh.response.{Output, Suggestions}
 import actor.ali.linh.response.OutputItem.{logg, success, text}
@@ -71,18 +71,37 @@ class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
     def processCmd(result: Command): Unit = {
         result match {
             case AddToStock(name, qty) =>
-                if (! store.canAdd(name)) {
+                if ( store.exists(name)) {
                     sendLog(s"You already have a product called <strong>${name}. Please choose another name.")
                     return
                 }
 
                 val item = Item(name, randNumber(), qty)
                 this.store.add(item)
-                val suggestions = (0 to 2).map(_ => randNumber()).filterNot(_ == item.price)
+                val suggestions = (0 to 3).map(_ => randNumber()).filterNot(_ == item.price)
                     .map(price => "set " + name + " price to $" + price)
                 sendSuccess("Added <strong> " + qty + "</strong> " + name + "</strong> - Price: $" + item.price, suggestions)
+
+
+            case ChangePrice(name, newPrice) =>
+                if (! validateItem(name))
+                    return
+
+                store.updatePrice(name, newPrice)
+                val suggestions = (0 to 3).map(_ => s"sell ${randNumber()} $name")
+                sendNormal("Price Updated", suggestions)
         }
 
+    }
+
+    private def validateItem(name: String):Boolean = {
+        if (! store.exists(name)) {
+            sendLog(s"You haven't added a product called <strong>${name}</strong> yet. Would you like to add it?",
+                Suggestions("Suggestions", Seq(s"add ${randNumber()} $name")))
+            return false
+        }
+
+        return true
     }
 
     private def parse(cmd: String):Unit = {
@@ -105,8 +124,19 @@ class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
             out ! Json.render(Output.single(success(msg), Suggestions("Suggestions", suggestions)))
     }
 
+    private def sendNormal(msg: String, suggestions: Seq[String] = Nil ):Unit = {
+        if (suggestions.isEmpty)
+            out ! Json.render(Output.single(text(msg)))
+        else
+            out ! Json.render(Output.single(text(msg), Suggestions("Suggestions", suggestions)))
+    }
+
     private def sendLog(msg: String = "Sorry, I don't quite understand that."):Unit = {
         out ! Json.render(Output.single(logg(msg)))
+    }
+
+    private def sendLog(msg: String, suggestions: Suggestions):Unit = {
+        out ! Json.render(Output.single(logg(msg), suggestions))
     }
 
     override def receive: Receive = {

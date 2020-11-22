@@ -15,7 +15,13 @@ class Store {
         collection.mutable.Map.empty
 
 
-    def canAdd(name: String): Boolean = ! items.contains(name)
+    def exists(name: String): Boolean = items.contains(name)
 
     def add(item: Item): Unit = items.addOne( (item.name), item )
+
+    def updatePrice(name :String, price:Double): Unit = {
+        val newI = items(name).copy(price = price)
+        items(name) = newI
+
+    }
 }
