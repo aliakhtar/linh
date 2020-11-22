@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{AddToStock, ChangePrice, Command, NewOrder}
+import actor.ali.linh.input.{AddToStock, BestSellers, ChangePrice, Command, HowManyItemOrders, HowManyStoreOrders, HowMuchItemRevenue, HowMuchStoreRevenue, NewOrder, WorstSellers}
 import actor.ali.linh.util.Json
 import actor.ali.linh.response.{Output, Suggestions}
 import actor.ali.linh.response.OutputItem.{logg, success, text}
@@ -97,14 +97,48 @@ class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
                     return
 
                 if (! store.canOrder(name, qty)) {
-                    sendNormal(s"You don't have $qty items of $name!", Seq("best seller", s"total revenue of $name",
-                    s"total orders of $name"))
+                    sendNormal(s"You don't have $qty items of $name!",
+                        Seq("how much total revenue", s"how much revenue from $name", s"how many orders of $name"))
                     return
                 }
 
                 store.newOrder(NewOrder(name, qty))
-                sendNormal(s"Order Saved.", Seq("total revenue", s"total revenue of $name",
-                    s"total orders of $name"))
+                sendNormal(s"Order Saved.", Seq("how much total revenue", s"how much revenue from $name",
+                    s"how many orders of $name"))
+
+
+            case HowMuchStoreRevenue() =>
+                sendNormal(s"Total Revenue today: ${store.totalRev()}", Seq("best seller", s"worst seller",
+                    s"how many total orders"))
+
+
+            case HowMuchItemRevenue(name) =>
+                if (! validateItem(name))
+                    return
+                sendNormal(s"Total Revenue from $name today: ${store.totalRev(name)}", Seq("best seller", s"worst seller",
+                    s"how many total orders"))
+
+
+            case HowManyStoreOrders() =>
+                sendNormal(s"Total Orders today: ${store.totalOrders()}", Seq("best seller", s"worst seller",
+                    s"how much total revenue"))
+
+
+            case HowManyItemOrders(name) =>
+                if (! validateItem(name))
+                    return
+                sendNormal(s"Total Orders of $name today: ${store.totalOrders(name)}", Seq("best seller", s"worst " +
+                    s"seller",
+                    s"how much total revenue"))
+
+
+            case BestSellers() =>
+                val result = this.store.bestSeller().map(_.name).getOrElse("None")
+                sendNormal(s"Today's best seller: <strong>$result</strong>")
+
+            case WorstSellers() =>
+                val result = this.store.worstSeller().map(_.name).getOrElse("None")
+                sendNormal(s"Today's worst seller: <strong>$result</strong>")
         }
 
     }
