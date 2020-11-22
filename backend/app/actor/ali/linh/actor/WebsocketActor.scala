@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 
 import actor.ali.linh.config.Env
-import actor.ali.linh.input.{AddToStock, ChangePrice, Command}
+import actor.ali.linh.input.{AddToStock, ChangePrice, Command, NewOrder}
 import actor.ali.linh.util.Json
 import actor.ali.linh.response.{Output, Suggestions}
 import actor.ali.linh.response.OutputItem.{logg, success, text}
@@ -90,6 +90,9 @@ class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
                 store.updatePrice(name, newPrice)
                 val suggestions = (0 to 3).map(_ => s"sell ${randNumber()} $name")
                 sendNormal("Price Updated", suggestions)
+
+
+            case NewOrder(name, qty) =>
         }
 
     }
