@@ -143,3 +143,6 @@ server.pid
 *.log
 
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains+all,angular,scala,playframework
+
+
+/backend-1.0

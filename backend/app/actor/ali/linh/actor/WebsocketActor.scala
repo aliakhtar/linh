@@ -13,20 +13,37 @@ import actor.ali.linh.response.OutputItem.{logg, success, text}
 import actor.ali.linh.store.{Item, Store}
 import akka.actor.{Actor, ActorRef, PoisonPill, Props}
 import com.google.common.cache.{Cache, CacheBuilder, CacheLoader, LoadingCache}
-import play.api.Logger
+import play.api.{Environment, Logger, Mode, Play}
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Random, Success, Try}
 import scala.collection.mutable
 import scala.concurrent.duration._
 
-class WebsocketActor(env: Env, out: ActorRef) extends Actor {
+class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
 
     private val log = Logger("WebsocketActor")
 
     //private implicit val ec: ExecutionContext = env.ioEc
 
     private val store = new Store()
+
+    log.info(Class.forName("actor.ali.linh.input.Commands").descriptorString())
+
+    def withClassLoaderHack[E](f: () => E): E = {
+        e.mode match {
+            case Mode.Dev =>
+                val old = Thread.currentThread().getContextClassLoader
+                try {
+                    Thread.currentThread().setContextClassLoader(e.classLoader)
+                    f()
+                } finally {
+                    Thread.currentThread().setContextClassLoader(old)
+                }
+            case _ =>
+                f()
+        }
+    }
 
     welcome()
 
@@ -62,14 +79,14 @@ class WebsocketActor(env: Env, out: ActorRef) extends Actor {
                 val item = Item(name, randNumber(), qty)
                 this.store.add(item)
                 val suggestions = (0 to 2).map(_ => randNumber()).filterNot(_ == item.price)
-                    .map(price => s"set ${name} price to \\$$price")
-                sendSuccess(s"Added <strong>$name</strong> - Price: ${item.price}", suggestions)
+                    .map(price => "set " + name + " price to $" + price)
+                sendSuccess("Added <strong> " + qty + "</strong> " + name + "</strong> - Price: $" + item.price, suggestions)
         }
 
     }
 
     private def parse(cmd: String):Unit = {
-        Try(env.client.parse(cmd)) match {
+        Try(withClassLoaderHack(() => env.client.parse(cmd))) match {
             case Success(Some(result: Command)) => processCmd(result)
             case Success(None) =>
                 sendLog()
@@ -119,6 +136,6 @@ object WebsocketActor {
 
     private def today():String = format.format(new Date())
 
-    def props(env: Env, out: ActorRef): Props =
-        Props(new WebsocketActor(env, out))
+    def props(env: Env, e: Environment, out: ActorRef): Props =
+        Props(new WebsocketActor(env, e, out))
 }

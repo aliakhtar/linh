@@ -16,6 +16,7 @@ class Env {
     val conf: Config = Json.parse[Config](IO.readResource("config.json").mkString)
 
     val client = new SempreClient(this)
+    client.parse("wakey")
 }
 
 object Env {

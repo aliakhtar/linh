@@ -12,6 +12,8 @@ scalaVersion := "2.13.3"
 
 libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice )
 
+classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.AllLibraryJars
+
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2"
 
 
