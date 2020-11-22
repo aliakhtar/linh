@@ -11,10 +11,10 @@
     <option name="play2JvmOptions">
       <array>
         <option value="-Xms512M" />
-        <option value="-Xmx1024M" />
+        <option value="-Xmx2024M" />
         <option value="-Xss1M" />
         <option value="-XX:+CMSClassUnloadingEnabled" />
-        <option value="-XX:MaxPermSize=256M" />
+        <option value="-XX:MaxPermSize=2G" />
       </array>
     </option>
     <option name="play2NeedOpenInBrowser" value="true" />
