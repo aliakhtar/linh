@@ -29,7 +29,7 @@ class Store {
         items(name) = newI
     }
 
-    def canOrder(name: String):Boolean = items(name).qty > 0
+    def canOrder(name: String, qty: Double):Boolean = items(name).qty >= qty
 
     def newOrder(o: NewOrder): orders.type = {
         val i = items(o.name)

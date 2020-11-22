@@ -80,7 +80,7 @@ class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
                 this.store.add(item)
                 val suggestions = (0 to 3).map(_ => randNumber()).filterNot(_ == item.price)
                     .map(price => "set " + name + " price to $" + price)
-                sendSuccess("Added <strong> " + qty + "</strong> " + name + "</strong> - Price: $" + item.price, suggestions)
+                sendNormal("Added <strong> " + qty + "</strong> " + name + "</strong> - Price: $" + item.price, suggestions)
 
 
             case ChangePrice(name, newPrice) =>
@@ -93,6 +93,18 @@ class WebsocketActor(env: Env, e: Environment, out: ActorRef) extends Actor {
 
 
             case NewOrder(name, qty) =>
+                if (! validateItem(name))
+                    return
+
+                if (! store.canOrder(name, qty)) {
+                    sendNormal(s"You don't have $qty items of $name!", Seq("best seller", s"total revenue of $name",
+                    s"total orders of $name"))
+                    return
+                }
+
+                store.newOrder(NewOrder(name, qty))
+                sendNormal(s"Order Saved.", Seq("total revenue", s"total revenue of $name",
+                    s"total orders of $name", ))
         }
 
     }
