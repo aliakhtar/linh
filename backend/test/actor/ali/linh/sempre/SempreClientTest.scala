@@ -48,6 +48,9 @@ class SempreClientTest extends AnyFunSuite with Matchers {
     test("add to stock") {
         check(AddToStock("apples", 10), "bought", "10", "apples")
         check(AddToStock("apples", 100), "bought", "100", "of", "apples")
+
+        check(AddToStock("apples", 10), "add", "10", "apples")
+        check(AddToStock("apples", 100), "add", "100", "of", "apples")
     }
 
     test("set price") {
